@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Scribbly -- Product</title>
+  </head>
+
+  <body>
+
+    <table border="1">
+      <thead>
+        <th>SKU</th>
+        <th>Name</th>
+        <th>Price</th>
+      </thead>
+
+    {% for product in products %}
+      <tr>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+      </tr>
+    {% endfor %}
+
+  </body>
+</head>

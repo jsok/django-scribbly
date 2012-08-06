@@ -15,3 +15,7 @@ urlpatterns += patterns('customer.views',
     url(r'^logout', "logout", name="logout"),
     url(r'^account/$', "account", name="account"),
 )
+
+urlpatterns += patterns('product.views',
+    url(r'^products', "products", name="products"),
+)

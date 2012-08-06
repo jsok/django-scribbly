@@ -130,6 +130,7 @@ INSTALLED_APPS = (
 
     # Scribbly Apps
     'customer',
+    'product',
 )
 
 AUTHENTICATION_BACKENDS = (
