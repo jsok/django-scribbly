@@ -111,7 +111,7 @@ ROOT_URLCONF = 'core.urls'
 WSGI_APPLICATION = 'core.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -122,10 +122,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    # For database migrations
-    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
+    # For database migrations
+    'south',
+
+    # Scribbly Apps
+    'customer',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'customer.auth.EmailBackend',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -156,3 +164,6 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = "/login"
+

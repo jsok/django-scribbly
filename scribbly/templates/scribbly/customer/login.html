@@ -1,0 +1,50 @@
+<html>
+
+  <head>
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div class="errorlist">
+        {{ login_form_errors }}
+    </div>
+
+    <div class="login">
+        <h2 class="authenticate">Login</h2>
+
+        <div class="description">
+            If you are already customer you can login. If you wish to open an account please email us.
+        </div>
+
+        <form class="authenticate"
+              action="login"
+              method="post">
+            {% csrf_token %}
+
+            <div class="form">
+                <table>
+                    {{ login_form }}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="customer/reset-password">Forgot password?</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <input type="hidden"
+                   name="action"
+                   value="login" />
+
+            <input type="hidden"
+                   name="next"
+                   value="{{ next_url }}" />
+
+            <button type="submit"
+                    class="button login-button emphasized left">Login</button>
+        </form>
+    </div>
+  </body>
+
+</html>
