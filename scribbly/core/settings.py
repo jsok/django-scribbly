@@ -1,4 +1,5 @@
 import os
+from os.path import join
 import django
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__)) + '/..'
@@ -15,7 +16,7 @@ MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = 'development.db'
-DATABASE_PATH = os.path.join(PROJECT_ROOT, 'db') + DATABASE_NAME
+DATABASE_PATH = join(join(PROJECT_ROOT, 'db'), DATABASE_NAME)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.' + DATABASE_ENGINE,
@@ -121,6 +122,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    # For database migrations
+    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
