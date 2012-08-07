@@ -1,0 +1,79 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_modify %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block extrahead %}{{ block.super }}
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
+{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=app_label %}">{{ app_label|capfirst|escape }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; Discount Matrix
+</div>
+{% endblock %}
+
+{% block content %}<div id="content-main">
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<div class="module" id="changelist">
+
+
+  <div class="results">
+    <table id="result_list">
+      <thead>
+        <tr>
+          <th scope="col">Product Category</th>
+          {% for customer_category in matrix_columns %}
+          <th scope="col"> {{ customer_category }} </th>
+          {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+      {% for product_category,discounts in matrix.items %}
+      {% cycle 'row1' 'row2' as rowcolors silent %}
+      <tr class="{{ rowcolors }}">
+        <th class="nowrap">{{ product_category }} </th>
+        {% for customer_category in matrix_columns %}
+        {% for key,discount in discounts.items %}
+        {% if key == customer_category %}
+        <td class="nowrap">
+          <input type="text" name="discount[{{product_category}}][{{customer_category}}]" id="id_discount" value="{{ discount|floatformat:2 }}">
+        </td>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+
+{% if errors %}
+    <p class="errornote">
+    {% blocktrans count counter=errors|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+    </p>
+    {{ adminform.form.non_field_errors }}
+{% endif %}
+
+
+{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+
+
+</div>
+</form></div>
+{% endblock %}

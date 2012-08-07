@@ -1,0 +1,14 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+{% load i18n admin_static admin_list %}
+{% load url from future %}
+{% load admin_urls %}
+
+          {% block object-tools-items %}
+          {{ block.super }}
+            <li>
+            <a href="{% url cl.opts|admin_urlname:'matrix' %}" class="changelink">
+                {% blocktrans with cl.opts.verbose_name as name %}Matrix View{% endblocktrans %}
+              </a>
+            </li>
+          {% endblock %}
