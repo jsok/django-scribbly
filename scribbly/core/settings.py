@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'customer',
     'pricing',
     'product',
+    'taxon',
 )
 
 AUTHENTICATION_BACKENDS = (

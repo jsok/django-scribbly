@@ -9,7 +9,9 @@
       <thead>
         <th>SKU</th>
         <th>Name</th>
-        <th>Price</th>
+        <th>Retail Price</th>
+        <th>Discount</th>
+        <th>Wholesale Price</th>
       </thead>
 
     {% for product in products %}
@@ -17,6 +19,8 @@
         <td>{{ product.sku }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.price }}</td>
+        <td>{{ product.customer_discount }}</td>
+        <td>{{ product.customer_price|floatformat:2 }}</td>
       </tr>
     {% endfor %}
 
