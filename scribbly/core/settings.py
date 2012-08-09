@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'south',
 
     # Scribbly Apps
+    'core',
     'catalog',
     'customer',
     'pricing',

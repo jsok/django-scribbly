@@ -49,19 +49,16 @@ class PricedProduct:
         price = self.retail_price * (1 - self.discount)
         return price
 
-def get_product_prices_for_taxon(taxon, customer):
+def get_products_for_taxon(taxon, customer):
     priced_products = {}
 
-    if taxon.has_children():
-         _get_priced_products(taxon, customer, priced_products)
-
-    return priced_products
-
-def _get_priced_products(taxon, customer, priced_products):
     for product in taxon.get_products():
         pp = PricedProduct(product, customer)
         priced_products[product.id] = pp
 
     for child in taxon.get_children():
-        _get_priced_products(child, customer, priced_products)
+        child_products = get_products_for_taxon(child, customer)
+        priced_products.update(child_products)
+
+    return priced_products
 

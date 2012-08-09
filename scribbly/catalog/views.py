@@ -4,9 +4,9 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from customer.utils import get_current_customer
-from pricing.utils import get_product_prices_for_taxon
+from pricing.utils import get_products_for_taxon
 from taxon.models import Taxon
-from taxon.utils import get_taxon_map, get_root_taxons
+from taxon.utils import get_root_taxons
 
 def index(request, taxon=None, template_name="scribbly/catalog/index.html"):
     taxon_map = get_root_taxons()
@@ -26,7 +26,7 @@ def index(request, taxon=None, template_name="scribbly/catalog/index.html"):
                     reverse('catalog.views.index'))
 
     customer = get_current_customer(request)
-    priced_products = get_product_prices_for_taxon(selected_taxon, customer)
+    priced_products = get_products_for_taxon(selected_taxon, customer)
 
     context = {
             "selected_taxon": selected_taxon,

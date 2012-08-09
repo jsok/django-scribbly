@@ -2,7 +2,7 @@
 
 {% load scribbly_extras %}
 
-{% for child in taxon.get_children %}
+{% if taxon.has_products %}
   <h2>{{ child.name }}</h2>
 
   <table border="1">
@@ -14,7 +14,7 @@
       <th>Price</th>
     </thead>
 
-  {% for product in child.get_products %}
+  {% for product in taxon.get_products %}
   {% with p=priced_products|dict_lookup:product.id %}
     <tr>
       <td>{{ p.sku }}</td>
@@ -26,8 +26,10 @@
     {% endwith %}
     {% endfor %}
   </table>
+{% endif %}
 
 
+{% for child in taxon.get_children %}
   {% with taxon=child template_name="scribbly/catalog/taxon_products.html" %}
     {% include template_name %}
   {% endwith %}

@@ -33,7 +33,10 @@ class Taxon(models.Model):
         return self.children_set.count() > 0
 
     def get_children(self):
-        return self.children_set.all()
+        return self.children_set.all().order_by('position')
+
+    def has_products(self):
+        return self.product_set.count() > 0
 
     def get_products(self):
         return self.product_set.all()
