@@ -13,7 +13,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Product', {
-            'fields': ('sku', 'name', 'price')
+            'fields': ('sku', 'name',)
+        }),
+        ('Pricing', {
+            'fields': ('price', 'price_category',)
         }),
         ('Taxonomies', {
             'fields': ('taxons',)
