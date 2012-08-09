@@ -1,13 +1,32 @@
 {# A template to display all products in the given taxon #}
 
+{% load scribbly_extras %}
+
 {% for child in taxon.get_children %}
   <h2>{{ child.name }}</h2>
 
-  <ul>
+  <table border="1">
+    <thead>
+      <th>SKU</th>
+      <th>Name</th>
+      <th>Retail Price</th>
+      <th>Discount</th>
+      <th>Price</th>
+    </thead>
+
   {% for product in child.get_products %}
-    <li>{{ product.name }}</li>
-  {% endfor %}
-  </ul>
+  {% with p=priced_products|dict_lookup:product.id %}
+    <tr>
+      <td>{{ p.sku }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.retail_price }}</td>
+      <td>{{ p.discount_as_percent_str }}</td>
+      <td>{{ p.discounted_price|floatformat:2 }}</td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+  </table>
+
 
   {% with taxon=child template_name="scribbly/catalog/taxon_products.html" %}
     {% include template_name %}

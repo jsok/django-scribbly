@@ -29,6 +29,8 @@ class Taxon(models.Model):
             parent = parent.parent
         return path + "/" + self.name
 
+    def has_children(self):
+        return self.children_set.count() > 0
 
     def get_children(self):
         return self.children_set.all()

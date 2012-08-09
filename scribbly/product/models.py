@@ -20,15 +20,6 @@ class Product(models.Model):
 
     taxons = models.ManyToManyField(Taxon)
 
-    @property
-    def customer_discount(self, user):
-        customer = Customer.objects.filter(user=user)
-        DiscountMatrixEntry.objects.filter(customer_category=customer.customer_category)
-        return 0.3
-
-    @property
-    def customer_price(self):
-        return (self.price * (1- self.customer_discount)) 
-
     def __unicode__(self):
         return self.name
+
