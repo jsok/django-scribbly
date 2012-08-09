@@ -96,8 +96,9 @@ TEMPLATE_LOADERS = (
 )
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + \
-    ('core.context_processors.applist',)
+TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
+    'core.context_processors.applist',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -133,6 +134,7 @@ INSTALLED_APPS = (
     'south',
 
     # Scribbly Apps
+    'catalog',
     'customer',
     'pricing',
     'product',
