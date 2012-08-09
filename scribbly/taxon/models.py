@@ -5,6 +5,7 @@ class Taxon(models.Model):
     A taxonomy is applied to products and is used to categorise them.
     """
     name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True, max_length=80)
     path = models.TextField(blank=True)
     position = models.PositiveSmallIntegerField()
 

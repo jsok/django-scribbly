@@ -8,7 +8,7 @@ from pricing.utils import get_products_for_taxon
 from taxon.models import Taxon
 from taxon.utils import get_root_taxons
 
-def index(request, taxon=None, template_name="scribbly/catalog/index.html"):
+def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html"):
     taxon_map = get_root_taxons()
 
     # A taxon map should exist, will only happen if none have been created
@@ -16,11 +16,11 @@ def index(request, taxon=None, template_name="scribbly/catalog/index.html"):
         raise Http404
 
     # We will display the first root taxon by default if none specified
-    if taxon is None:
+    if taxon_slug is None:
         selected_taxon = taxon_map[0]
     else:
         try:
-            selected_taxon = Taxon.objects.get(name__iexact=taxon)
+            selected_taxon = Taxon.objects.get(slug=taxon_slug)
         except Taxon.DoesNotExist:
             return HttpResponseRedirect(
                     reverse('catalog.views.index'))

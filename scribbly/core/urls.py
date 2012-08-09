@@ -21,6 +21,6 @@ urlpatterns += patterns('product.views',
 )
 
 urlpatterns += patterns('catalog.views',
-    url(r'^catalog/$', "index", name="catalog"),
-    url(r'^catalog/(?P<taxon>\w+)+/$', "index", name="catalog"),
+    url(r'^catalog/$', "index"),
+    url(r'^catalog/(?P<taxon_slug>[-\w]*)/$', "index"),
 )

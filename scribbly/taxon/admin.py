@@ -6,12 +6,13 @@ class TaxonAdmin(admin.ModelAdmin):
     model = Taxon
     list_display = ('path', 'position', 'name')
     list_editable = ['position', 'name']
+    prepopulated_fields = {"slug": ("name",)}
 
     readonly_fields = ('path',)
 
     fieldsets = (
         (None, {
-            'fields': ('path', 'name', 'position')
+            'fields': ('path', 'name', 'slug', 'position', 'parent')
         }),
     )
 

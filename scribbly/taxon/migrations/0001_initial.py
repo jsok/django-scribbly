@@ -12,9 +12,10 @@ class Migration(SchemaMigration):
         db.create_table('taxon_taxon', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=80)),
             ('path', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('position', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['taxon.Taxon'], null=True, blank=True)),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='children_set', null=True, to=orm['taxon.Taxon'])),
         ))
         db.send_create_signal('taxon', ['Taxon'])
 
@@ -29,9 +30,10 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Taxon'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['taxon.Taxon']", 'null': 'True', 'blank': 'True'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'children_set'", 'null': 'True', 'to': "orm['taxon.Taxon']"}),
             'path': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
+            'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '80'})
         }
     }
 
