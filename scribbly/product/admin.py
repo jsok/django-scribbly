@@ -10,10 +10,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('taxons__path',)
     filter_horizontal = ('taxons',)
     search_fields = ('sku', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
     fieldsets = (
         ('Product', {
-            'fields': ('sku', 'name',)
+            'fields': ('sku', 'name', 'slug',)
         }),
         ('Pricing', {
             'fields': ('price', 'price_category',)
