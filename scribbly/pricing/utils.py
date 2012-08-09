@@ -49,6 +49,13 @@ class PricedProduct:
         price = self.retail_price * (1 - self.discount)
         return price
 
+    @property
+    def on_hand(self):
+        if self.customer.user.is_staff:
+            return self.product.inventory_item.on_hand
+        else:
+            return self.product.inventory_item.on_hand_fuzzy
+
 def get_products_for_taxon(taxon, customer):
     priced_products = {}
 

@@ -12,6 +12,7 @@
       <th>Retail Price</th>
       <th>Discount</th>
       <th>Price</th>
+      <th>Stock On Hand</th>
     </thead>
 
   {% for product in taxon.get_products %}
@@ -22,6 +23,7 @@
       <td>{{ p.retail_price }}</td>
       <td>{{ p.discount_as_percent_str }}</td>
       <td>{{ p.discounted_price|floatformat:2 }}</td>
+      <td>{{ p.on_hand }}</td>
     </tr>
     {% endwith %}
     {% endfor %}

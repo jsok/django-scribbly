@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'core',
     'catalog',
     'customer',
+    'inventory',
     'pricing',
     'product',
     'taxon',
