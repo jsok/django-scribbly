@@ -9,7 +9,10 @@ class Taxon(models.Model):
     position = models.PositiveSmallIntegerField()
 
     # A taxon can be nested within another taxon
-    parent = models.ForeignKey('self', null=True, blank=True)
+    parent = models.ForeignKey('self',
+            related_name='children_set',
+            null=True,
+            blank=True)
 
     def save(self, *args, **kwargs):
         self.path = self.generate_path()
@@ -25,6 +28,13 @@ class Taxon(models.Model):
             path = "/%s" % parent.name + path
             parent = parent.parent
         return path + "/" + self.name
+
+
+    def get_children(self):
+        return self.children_set.all()
+
+    def get_products(self):
+        return self.product_set.all()
 
     class Meta:
         verbose_name_plural = "Taxonomies"

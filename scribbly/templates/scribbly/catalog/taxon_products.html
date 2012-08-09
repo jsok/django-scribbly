@@ -1,0 +1,16 @@
+{# A template to display all products in the given taxon #}
+
+{% for child in taxon.get_children %}
+  <h2>{{ child.name }}</h2>
+
+  <ul>
+  {% for product in child.get_products %}
+    <li>{{ product.name }}</li>
+  {% endfor %}
+  </ul>
+
+  {% with taxon=child template_name="scribbly/catalog/taxon_products.html" %}
+    {% include template_name %}
+  {% endwith %}
+{% endfor %}
+

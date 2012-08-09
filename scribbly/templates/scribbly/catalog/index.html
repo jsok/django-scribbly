@@ -1,0 +1,13 @@
+<h1>Catalog:</h1>
+
+<ul>
+{% for taxon in taxon_map %}
+  {% include "scribbly/catalog/taxon_navbar.html" %}
+{% endfor %}
+</ul>
+
+<h1>{{ selected_taxon.name }}</h1>
+{% with taxon=selected_taxon template_name="scribbly/catalog/taxon_products.html" %}
+  {% include template_name %}
+{% endwith %}
+
