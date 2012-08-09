@@ -1,12 +1,8 @@
 {# A recursive template to display all children of a given taxon for use in a navigation bar #}
 
-<li> <a href="{% url catalog.views.index taxon.slug %}"> {{ taxon.name }} </a>
-  {% for child in taxon.get_children %}
-  <ul>
-    {% with taxon=child template_name="scribbly/catalog/taxon_navbar.html" %}
-      {% include template_name %}
+<li {% if labels %}class="nav-header"{% endif %}> <a href="{% url catalog.views.index taxon.slug %}"> {{ taxon.name }} </a></li>
+{% for child in taxon.get_children %}
+    {% with taxon=child template_name="scribbly/catalog/taxon_navbar.html" labels=0 %}
+        {% include template_name %}
     {% endwith %}
-  </ul>
-  {% endfor %}
-
-</li>
+{% endfor %}

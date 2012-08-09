@@ -1,14 +1,24 @@
-<h1>Catalog:</h1>
+{% extends "scribbly/base.html" %}
+{% block title %}Catalog{% endblock %}
 
-<ul>
-{% for taxon in taxon_map %}
-  {% include "scribbly/catalog/taxon_navbar.html" %}
-{% endfor %}
-</ul>
+{% block left-nav %}
+<nav class="well sidebar-nav">
+    <ul class="nav nav-list">
+        {% for taxon in taxon_map %}
+            {% with labels=1 %}
+                {% include "scribbly/catalog/taxon_navbar.html" %}
+            {% endwith %}
+            {% if not forloop.last %}<li class="divider"></li>{% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
 
-<h1>{{ selected_taxon.name }}</h1>
-{% with taxon=selected_taxon template_name="scribbly/catalog/taxon_products.html" %}
-  {% include template_name %}
-{% endwith %}
-
-
+{% block content %}
+<section id="content">
+    <h1>{{ selected_taxon.name }}</h1>
+    {% with taxon=selected_taxon template_name="scribbly/catalog/taxon_products.html" %}
+        {% include template_name %}
+    {% endwith %}
+</section>
+{% endblock %}
