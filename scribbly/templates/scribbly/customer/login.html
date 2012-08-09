@@ -6,7 +6,9 @@
 
   <body>
     <div class="errorlist">
+      {% if login_form_errors %}
         {{ login_form_errors }}
+      {% endif %}
     </div>
 
     <div class="login">

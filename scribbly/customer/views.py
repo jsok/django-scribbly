@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, AnonymousUser
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -12,7 +13,6 @@ def login(request, template_name="scribbly/customer/login.html"):
     login_form = AuthenticationForm()
     login_form.fields["username"].label = u"Email"
 
-    print request.POST
     if request.POST.get("action") == "login":
         login_form = AuthenticationForm(data=request.POST)
         login_form.fields["username"].label = u"Email"
@@ -28,7 +28,7 @@ def login(request, template_name="scribbly/customer/login.html"):
     if next_url is None:
         next_url = request.META.get("HTTP_REFERER")
     if next_url is None:
-        next_url = reverse("account_view")
+        next_url = reverse("customer.views.account")
 
     try:
         login_form_errors = login_form.errors["__all__"]
@@ -42,8 +42,6 @@ def login(request, template_name="scribbly/customer/login.html"):
         }))
 
 def logout(request):
-    print request.user
-
     if isinstance(request.user, AnonymousUser):
         return HttpResponse("You are not currently logged in.")
 

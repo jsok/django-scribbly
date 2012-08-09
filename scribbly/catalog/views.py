@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
@@ -8,6 +9,7 @@ from pricing.utils import get_products_for_taxon
 from taxon.models import Taxon
 from taxon.utils import get_root_taxons
 
+@login_required
 def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html"):
     taxon_map = get_root_taxons()
 
