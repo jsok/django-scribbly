@@ -32,7 +32,7 @@ class DiscountMatrixEntry(models.Model):
     ProductPriceCategories with CustomerPriceCategories
     and gives the resulting discount.
     """
-    discount = models.DecimalField(max_digits=4, decimal_places=2)
+    discount = models.FloatField(default=0.0)
 
     product_category = models.ForeignKey(ProductPriceCategory)
     customer_category = models.ForeignKey(CustomerPriceCategory)
