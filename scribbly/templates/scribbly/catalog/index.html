@@ -16,9 +16,14 @@
 
 {% block content %}
 <section id="content">
+  <div class="page-header">
     <h1>{{ selected_taxon.name }}</h1>
+  </div>
+
+  <form>
     {% with taxon=selected_taxon template_name="scribbly/catalog/taxon_products.html" %}
         {% include template_name %}
     {% endwith %}
+  </form>
 </section>
 {% endblock %}
