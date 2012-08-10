@@ -23,8 +23,9 @@ class InventoryItem(models.Model):
     def __unicode__(self):
         return self.product.name
 
-    class meta:
-        verbose_name_plural = "Inventory Items"
+    class Meta:
+        verbose_name = "Inventory Item"
+        verbose_name_plural = "Inventory"
 
     @property
     def on_hand_fuzzy(self):
