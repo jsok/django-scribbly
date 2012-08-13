@@ -10,3 +10,14 @@ body {
 td {
   font-size: 13px;
 }
+
+th.catalog-sku, th.catalog-rrp, th.catalog-discount, th.catalog-price, th.catalog-onhand
+{
+  width: 10%
+}
+th.catalog-order {
+  width: 15%
+}
+th.catalog-name {
+  width: 35%
+}
