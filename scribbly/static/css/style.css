@@ -1,3 +1,15 @@
+/* Reset some bootstrap styles. */
+form {
+    padding: 0;
+    margin: 0;
+}
+.table td {
+    vertical-align: middle;
+    font-size: 13px;
+    table-layout: fixed;
+}
+
+/* Our styles. */
 body {
     padding-top: 60px;
     padding-bottom: 40px;
@@ -7,17 +19,26 @@ body {
     font-size: 13px;
 }
 
-td {
-  font-size: 13px;
-}
 
 th.catalog-sku, th.catalog-rrp, th.catalog-discount, th.catalog-price, th.catalog-onhand
 {
-  width: 10%
+    width: 10%;
 }
 th.catalog-order {
-  width: 15%
+    width: 20%;
 }
 th.catalog-name {
-  width: 35%
+    width: 30%;
 }
+
+input.catalog-quantity {
+    width: 71px;
+    height: 28px;
+    margin-top: 1px;
+}
+
+span.catalog-times {
+    padding: 0 2px 0 2px
+}
+
+

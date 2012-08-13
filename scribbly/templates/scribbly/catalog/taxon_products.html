@@ -19,17 +19,18 @@
   {% for product in taxon.get_products %}
   {% with p=priced_products|dict_lookup:product.id %}
     <tr>
-      <td rowspan="1" class=""><p>{{ p.sku }}</p></td>
-      <td><p>{{ p.name }}</p></td>
-      <td><p>{{ p.retail_price }}</p></td>
-      <td><p>{{ p.discount_as_percent_str }}</p></td>
-      <td><p>{{ p.discounted_price|floatformat:2 }}</p></td>
-      <td><span class="label">{{ p.on_hand }}</span></p></td>
+      <td rowspan="1" class="">{{ p.sku }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.retail_price }}</td>
+      <td>{{ p.discount_as_percent_str }}</td>
+      <td>{{ p.discounted_price|floatformat:2 }}</td>
+      <td><span class="label">{{ p.on_hand }}</span></td>
       <td>
         <form class="form-inline">
         <div class="controls">
+            <input class="catalog-quantity input-small" type="text" placeholder="Quantity" />
+            <span class="catalog-times">x</span>
           <button class="btn btn-primary js-addbutton" data-pk="{{ p.product_pk }}" type="button">Add</button>
-          <input class="input-small" type="text" placeholder="Quantity" />
         </div>
         </form>
       </td>
