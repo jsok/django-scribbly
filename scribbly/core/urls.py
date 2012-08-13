@@ -16,11 +16,11 @@ urlpatterns += patterns('customer.views',
     url(r'^account/$', "account", name="account"),
 )
 
-urlpatterns += patterns('product.views',
-    url(r'^products', "products", name="products"),
-)
-
 urlpatterns += patterns('catalog.views',
     url(r'^catalog/$', "index"),
     url(r'^catalog/(?P<taxon_slug>[-\w]*)/$', "index"),
+)
+
+urlpatterns += patterns('cart.views',
+    url(r'^cart/add_product_to_cart$', "add_product_to_cart"),
 )

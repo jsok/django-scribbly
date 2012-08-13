@@ -133,6 +133,7 @@ INSTALLED_APPS = (
 
     # Scribbly Apps
     'core',
+    'cart',
     'catalog',
     'customer',
     'inventory',
