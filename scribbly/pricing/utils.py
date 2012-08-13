@@ -19,6 +19,10 @@ class PricedProduct:
         return self.product.name
 
     @property
+    def product_pk(self):
+        return self.product.pk
+
+    @property
     def sku(self):
         return self.product.sku
 

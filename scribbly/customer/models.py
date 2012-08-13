@@ -39,7 +39,7 @@ class Customer(models.Model):
     customer_category = models.ForeignKey(CustomerPriceCategory, null=False)
 
     def __unicode__(self):
-        return "%s" % self.user.email
+        return "[%s] %s" % (self.company.name, self.user.email)
 
 class Address(models.Model):
     address_line_1 = models.CharField(max_length=100)
