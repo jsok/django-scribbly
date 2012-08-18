@@ -32,7 +32,10 @@ def add_product_to_cart(request):
 
     cart_items = request.session["cart_items"]
     if cart_items.has_key(product.pk):
-        cart_items[product.pk] += quantity
+        if (quantity == 0):
+            del cart_items[product.pk]
+        else:
+            cart_items[product.pk] = quantity
     else:
         cart_items[product.pk] = quantity
     request.session.modified = True
