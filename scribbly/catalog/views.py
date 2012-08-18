@@ -30,6 +30,14 @@ def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html")
     customer = get_current_customer(request)
     priced_products = get_products_for_taxon(selected_taxon, customer)
 
+    # Update quantities in priced_products from the cart_items
+    if request.session.has_key("cart_items"):
+        cart_items = request.session["cart_items"]
+
+        for product_pk, pp in priced_products.iteritems():
+            if cart_items.has_key(product_pk):
+                pp.quantity = cart_items[product_pk]
+
     context = {
             "selected_taxon": selected_taxon,
             "taxon_map": taxon_map,
@@ -38,4 +46,3 @@ def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html")
 
     return render_to_response(template_name,
             RequestContext(request, context))
-

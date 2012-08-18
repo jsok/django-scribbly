@@ -28,12 +28,18 @@
       <td>
         <form class="form-inline form-catalog-add-product">
         <div class="controls">
-            <input class="catalog-quantity input-small" type="text" name="quantity" placeholder="Quantity" />
-            <input type="hidden" name="product-id" value="{{ p.product_pk }}" />
-            <span class="catalog-times">x</span>
-            <div class="btn-group catalog-line-button">
-              <button class="btn btn-primary js-addbutton" id="{{ p.product_pk }}" type="button">Add</button>
-            </div>
+          <input class="catalog-quantity input-small" type="text" name="quantity" placeholder="Quantity" value="{{p.quantity}}" />
+          <input type="hidden" name="product-id" value="{{ p.product_pk }}" />
+          <span class="catalog-times">x</span>
+          {% if p.quantity > 0  %}
+            {% with product_pk=p.product_pk template_name="scribbly/catalog/order_button.html" %}
+              {% include template_name %}
+            {% endwith %}
+          {% else %}
+            {% with product_pk=p.product_pk template_name="scribbly/catalog/add_button.html" %}
+              {% include template_name %}
+            {% endwith %}
+          {% endif %}
         </div>
         </form>
       </td>

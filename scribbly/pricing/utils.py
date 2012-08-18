@@ -10,6 +10,8 @@ class PricedProduct:
     product = None
     customer = None
 
+    quantity = 0
+
     def __init__(self, product_model, customer_model):
         self.product = product_model
         self.customer = customer_model

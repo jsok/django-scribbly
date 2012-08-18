@@ -16,25 +16,45 @@ function getCookie(name) {
   return cookieValue;
 }
 
-$("button.js-addbutton").each(function (index){
-  var pk = $(this).data("pk");
+function serializeJSON(form) {
+  var params = {};
+  jQuery.each(jQuery(form).serializeArray(), function(index,value) {
+    params[value.name] = value.value;
+  });
+  return params;
+}
 
-  $(this).click(function (){
+function inform_product_added_to_cart(data, status, jqXHR) {
+
+      // Change the Add button to an Update button
+      var buttonid = "button#" + data["product-id"]
+      var buttondiv = $(buttonid).closest("div")
+      $(buttondiv).replaceWith(data["button-div"])
+      buttonid = "button#" + data["product-id"]
+      $(buttonid).dropdown()
+}
+
+function add_product_to_cart(data) {
     $.ajax({
       url: "/cart/add_product_to_cart",
-      data: {'pk': pk},
+      data: data,
       type: "POST",
-        beforeSend: function ( xhr ) {
+      beforeSend: function (xhr) {
           xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
       },
-      success: function(data, textStatus, jqXHR) {
-        console.log(data.product)
+      error: function(jqXHR, testStatus, errorThrown) {
+        // Todo: Notify if fail
       },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(testStatus + " error: " + errorThrown)
-      }
+      success: inform_product_added_to_cart,
     }); 
+}
+
+$("button.js-addbutton").each(function (index){
+  $(this).click(function (){
+    var form = $(this).closest('form');
+    var data = serializeJSON(form);
+    add_product_to_cart(data);
   });
 });
 
-});
+}); // document.ready
