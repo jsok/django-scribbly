@@ -26,11 +26,14 @@
       <td>{{ p.discounted_price|floatformat:2 }}</td>
       <td><span class="label">{{ p.on_hand }}</span></td>
       <td>
-        <form class="form-inline">
+        <form class="form-inline form-catalog-add-product">
         <div class="controls">
-            <input class="catalog-quantity input-small" type="text" placeholder="Quantity" />
+            <input class="catalog-quantity input-small" type="text" name="quantity" placeholder="Quantity" />
+            <input type="hidden" name="product-id" value="{{ p.product_pk }}" />
             <span class="catalog-times">x</span>
-          <button class="btn btn-primary js-addbutton" data-pk="{{ p.product_pk }}" type="button">Add</button>
+            <div class="btn-group catalog-line-button">
+              <button class="btn btn-primary js-addbutton" id="{{ p.product_pk }}" type="button">Add</button>
+            </div>
         </div>
         </form>
       </td>

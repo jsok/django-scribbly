@@ -1,0 +1,14 @@
+{# This partial is returned by AJAX to catalog/tax_products.html to update the order button #}
+
+<div class="btn-group catalog-line-button">
+  <button class="btn btn-success" id="{{ product_id }}">Update</button>
+  <button class="btn btn-success dropdown-toggle js-updatebutton" id="{{ product_id }}">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+    <a href="#"><i class="icon-remove-sign"></i> Remove</a>
+    </li>
+  </ul>
+</div>
+
