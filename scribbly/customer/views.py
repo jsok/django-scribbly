@@ -45,6 +45,9 @@ def logout(request):
     if isinstance(request.user, AnonymousUser):
         return HttpResponse("You are not currently logged in.")
 
+    # Clear the session on logout
+    request.session.flush()
+
     from django.contrib.auth import logout
     logout(request)
     return HttpResponse("You have been logged out.")
