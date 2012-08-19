@@ -1,7 +1,6 @@
 var Climbcare = (function() {
     var urls = {
         addToCart: "/cart/add_product_to_cart",
-        removeFromCart: "/cart/remove_product_from_cart"
     };
 
     function getCookie(name) {
@@ -28,12 +27,24 @@ var Climbcare = (function() {
         return params;
     }
 
+    function BindCartRemoveButton(selector) {
+        $(selector).each(function (index){
+            $(this).click(function () {
+                var data = {
+                  "product-id": $(this).data("product-id"),
+                  "quantity": 0
+                }
+                UpdateCart(data);
+            });
+        });
+    }
+
     function BindCartModifyButton(selector) {
         $(selector).each(function (index){
             $(this).click(function () {
                 var form = $(this).closest('form');
                 var data = serializeJSON(form);
-                AddToCart(data);
+                UpdateCart(data);
 
                 // Stop submission of the form.
                 return false;
@@ -41,7 +52,7 @@ var Climbcare = (function() {
         });
     }
 
-    function AddToCart(data) {
+    function UpdateCart(data) {
         $.ajax({
             url: urls.addToCart,
             data: data,
@@ -58,8 +69,11 @@ var Climbcare = (function() {
                 $(buttonDiv).replaceWith(data["button-div"])
                 $(".dropdown-toggle").dropdown();
 
+                $(buttonDiv).siblings("input.catalog-quantity").val(data["quantity"]);
+
                 // Bind update button.
                 BindCartModifyButton("button.js-cartmodifybutton");
+                BindCartRemoveButton("a.js-cartremovebutton");
             }
         }); 
     }
@@ -67,6 +81,7 @@ var Climbcare = (function() {
     return {
         InitCatalog: function() {
             BindCartModifyButton("button.js-cartmodifybutton");
+            BindCartRemoveButton("a.js-cartremovebutton");
         }
     };
 })();

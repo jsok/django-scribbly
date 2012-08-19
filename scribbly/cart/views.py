@@ -15,6 +15,7 @@ def add_product_to_cart(request):
         return HttpResponseBadRequest("Please enter a quantity")
     quantity = int(quantity)
 
+    # Render the result to send back to client
     if quantity == 0:
         t = loader.get_template("scribbly/catalog/add_button.html")
     else:
