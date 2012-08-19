@@ -27,6 +27,16 @@ var Climbcare = (function() {
         return params;
     }
 
+    function DisableSubmitOnQuantity(selector) {
+        $(selector).each(function (index){
+          $(this).keypress(function (event) {
+            // Disable enter key from POSTing form
+            if (event.which == 13)
+              event.preventDefault();
+          });
+        });
+    }
+
     function BindCartRemoveButton(selector) {
         $(selector).each(function (index){
             $(this).click(function () {
@@ -82,6 +92,7 @@ var Climbcare = (function() {
         InitCatalog: function() {
             BindCartModifyButton("button.js-cartmodifybutton");
             BindCartRemoveButton("a.js-cartremovebutton");
+            DisableSubmitOnQuantity("input.catalog-quantity");
         }
     };
 })();
