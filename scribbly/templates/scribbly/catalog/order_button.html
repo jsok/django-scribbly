@@ -1,11 +1,11 @@
-            <div class="btn-group catalog-line-button">
-              <button class="btn btn-success js-updatebutton" id="{{ product_pk }}">Update</button>
+<div class="btn-group catalog-line-button catalog-product-{{ product_pk }}">
+              <button class="btn btn-success js-cartmodifybutton" id="{{ product_pk }}">Update</button>
               <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="{{ product_pk }}">
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
                 <li>
-                <a href="#"><i class="icon-remove-sign"></i>&nbsp;Remove</a>
+                <a class="js-cartremovebutton" data-product-id="{{ product_pk }}" href="#"><i class="icon-remove-sign"></i>&nbsp;Remove</a>
                 </li>
               </ul>
             </div>

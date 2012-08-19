@@ -15,8 +15,10 @@ def add_product_to_cart(request):
         return HttpResponseBadRequest("Please enter a quantity")
     quantity = int(quantity)
 
-    # Render the partial for the update button
-    t = loader.get_template("scribbly/catalog/order_button.html")
+    if quantity == 0:
+        t = loader.get_template("scribbly/catalog/add_button.html")
+    else:
+        t = loader.get_template("scribbly/catalog/order_button.html")
     c = RequestContext(request, {"product_pk": product.pk})
 
     result = simplejson.dumps({
