@@ -131,6 +131,9 @@ INSTALLED_APPS = (
     # For database migrations
     'south',
 
+    # For model APIs
+    'tastypie',
+
     # Scribbly Apps
     'core',
     'cart',
