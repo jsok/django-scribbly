@@ -25,7 +25,7 @@ def add_product_to_cart(request):
     result = simplejson.dumps({
         "product-id": product.pk,
         "product": product.name,
-        "quantity": quantity,
+        "quantity": quantity if quantity > 0 else "",
         "button-div": t.render(c),
     })
 

@@ -28,7 +28,7 @@
       <td>
         <form class="form-inline form-catalog-add-product">
         <div class="controls">
-          <input class="catalog-quantity input-small" type="text" name="quantity" placeholder="Quantity" value="{{p.quantity}}" />
+          <input class="catalog-quantity input-small" type="text" name="quantity" placeholder="Quantity" value="{% if p.quantity > 0 %}{{p.quantity}}{% endif %}" />
           <input type="hidden" name="product-id" value="{{ p.product_pk }}" />
           <span class="catalog-times">x</span>
           {% if p.quantity > 0  %}
