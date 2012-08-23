@@ -23,3 +23,11 @@ urlpatterns += patterns('catalog.views',
 urlpatterns += patterns('cart.views',
     url(r'^cart/add_product_to_cart$', "add_product_to_cart"),
 )
+
+# API urls
+from product.api import ProductResource
+product_resource = ProductResource()
+
+urlpatterns += patterns('product.api',
+    url(r'^api/', include(product_resource.urls)),
+)
