@@ -1,6 +1,7 @@
 var Climbcare = (function() {
     var urls = {
         addToCart: "/cart/add_product_to_cart",
+        productSearch: "/api/product/search",
     };
 
     function getCookie(name) {
@@ -88,15 +89,46 @@ var Climbcare = (function() {
         }); 
     }
 
+    function BindSearchBox(selector) {
+      $(selector).typeahead({
+        source: function(query, process) {
+          $.ajax({
+            url: urls.productSearch,
+            data: { 'q': query },
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+            },
+            error: function(jqXHR, testStatus, errorThrown) {
+              // Todo: Notify if fail
+            },
+            success: function(data, status, jqXHR) {
+              names = []
+              // Extract the names from all results
+              $(data.objects).each(function(result) {
+                names.push(this["name"])
+              });
+              // Use typeahead callback to return results
+              process(names)
+            }
+          })
+        }
+      });
+
+    }
+
     return {
         InitCatalog: function() {
             BindCartModifyButton("button.js-cartmodifybutton");
             BindCartRemoveButton("a.js-cartremovebutton");
             DisableSubmitOnQuantity("input.catalog-quantity");
+        },
+        InitSearch: function() {
+            BindSearchBox("input.js-product-search");
         }
     };
 })();
 
 $(document).ready(function() {
     Climbcare.InitCatalog();
+    Climbcare.InitSearch();
 });

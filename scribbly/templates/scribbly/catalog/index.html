@@ -3,6 +3,11 @@
 
 {% block left-nav %}
 <nav class="well sidebar-nav">
+    <div class="search-bar">
+      Search:
+      <input class="js-product-search" type="text" data-provide="typeahead">
+    </div>
+
     <ul class="nav nav-list">
         {% for taxon in taxon_map %}
             {% with labels=1 %}
