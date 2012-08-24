@@ -53,6 +53,7 @@ var Climbcare = (function() {
     function BindCartModifyButton(selector) {
         $(selector).each(function (index){
             $(this).click(function () {
+                $(this).button('loading')
                 var form = $(this).closest('form');
                 var data = serializeJSON(form);
                 UpdateCart(data);
