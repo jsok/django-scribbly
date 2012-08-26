@@ -27,14 +27,14 @@ def add_product_to_cart(request):
 
     product = get_object_or_404(Product, pk=request.POST.get("product-id"))
 
-    quantity_error = False
-    quantity = request.POST.get("quantity")
-    if not quantity:
+    try:
+        quantity = int(request.POST.get("quantity"))
+        if quantity < 0:
+            raise ValueError
+        quantity_error = False
+    except:
         quantity = 0
-    elif int(quantity) < 0:
         quantity_error = True
-    else:
-        quantity = int(quantity)
 
     # Render the result to send back to client
     if quantity == 0 or quantity_error:
@@ -53,8 +53,6 @@ def add_product_to_cart(request):
         "quantity": quantity if quantity > 0 else "",
         "button-div": t.render(c),
     })
-
-    print quantity_error, quantity
 
     if not quantity_error:
         # Add product to session cart
