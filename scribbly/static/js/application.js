@@ -56,7 +56,7 @@ var Climbcare = (function() {
                 $(this).button('loading')
                 var form = $(this).closest('form');
                 var data = serializeJSON(form);
-                UpdateCart(data);
+                UpdateCart(data)
 
                 // Stop submission of the form.
                 return false;

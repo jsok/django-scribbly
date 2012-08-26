@@ -46,3 +46,4 @@ def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html")
 
     return render_to_response(template_name,
             RequestContext(request, context))
+

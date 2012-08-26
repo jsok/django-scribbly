@@ -1,3 +1,7 @@
-<div class="btn-group catalog-line-button catalog-product-{{ product_pk }}">
-              <button class="btn btn-primary js-cartmodifybutton" id="{{ product_pk }}" data-loading-text="Adding..." type="button">Add to Cart</button>
-            </div>
+<div class="catalog-line-button catalog-product-{{ product_pk }}">
+                <div class="btn-group">
+                  <button class="btn btn-primary js-cartmodifybutton" id="{{ product_pk }}" data-loading-text="Adding..." type="button">Add to Cart</button>
+                </div>
+                {% if error %}<i class="icon-exclamation-sign"></i>{% endif %}
+              </div>
+
