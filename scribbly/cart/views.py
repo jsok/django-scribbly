@@ -36,23 +36,16 @@ def add_product_to_cart(request):
         quantity = 0
         quantity_error = True
 
-    # Render the result to send back to client
+    # Render the new button to send back to client
     if quantity == 0 or quantity_error:
-        t = loader.get_template("scribbly/catalog/add_button.html")
+        button_t = loader.get_template("scribbly/catalog/add_button.html")
     else:
-        t = loader.get_template("scribbly/catalog/order_button.html")
-    c = RequestContext(request,
+        button_t = loader.get_template("scribbly/catalog/order_button.html")
+    button_c = RequestContext(request,
             {
                 "product_pk": product.pk,
                 "error": quantity_error,
             })
-
-    result = simplejson.dumps({
-        "product-id": product.pk,
-        "product": product.name,
-        "quantity": quantity if quantity > 0 else "",
-        "button-div": t.render(c),
-    })
 
     if not quantity_error:
         # Add product to session cart
@@ -68,5 +61,18 @@ def add_product_to_cart(request):
         else:
             cart_items[product.pk] = quantity
         request.session.modified = True
+
+    # Render the updated cart icon to send back to client
+    cart_items_count = len(request.session["cart_items"])
+    cart_t = loader.get_template("scribbly/cart/cart_navbar.html")
+    cart_c = RequestContext(request, { "cart_items_count": cart_items_count })
+
+    result = simplejson.dumps({
+        "product-id": product.pk,
+        "product": product.name,
+        "quantity": quantity if quantity > 0 else "",
+        "button-div": button_t.render(button_c),
+        "cart-nav-item": cart_t.render(cart_c),
+    })
 
     return HttpResponse(result, content_type="application/json")

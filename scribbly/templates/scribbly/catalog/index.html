@@ -1,6 +1,12 @@
 {% extends "scribbly/base.html" %}
 {% block title %}Catalog{% endblock %}
 
+{% block cart_icon %}
+{% with template_name="scribbly/cart/cart_navbar.html" %}
+  {% include template_name %}
+{% endwith %}
+{% endblock %}
+
 {% block left-nav %}
 <nav class="well sidebar-nav">
     <div class="search-bar">

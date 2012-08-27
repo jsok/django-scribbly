@@ -1,0 +1,8 @@
+<li class="js-cart-nav-item">
+<a href="/cart" >
+  <i class="icon-shopping-cart"></i>&nbsp;Cart&nbsp;
+  {% ifnotequal cart_items_count 0 %}
+  <span class="badge badge-inverse js-cart-items-count">{{ cart_items_count }}</span>
+  {% endifnotequal %}
+</a>
+</li>

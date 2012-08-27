@@ -38,30 +38,47 @@ var Climbcare = (function() {
         });
     }
 
-    function BindCartRemoveButton(selector) {
+    function BindCartRemoveButtons(selector) {
         $(selector).each(function (index){
-            $(this).click(function () {
-                var data = {
-                  "product-id": $(this).data("product-id"),
-                  "quantity": 0
-                }
-                UpdateCart(data);
-            });
+            BindCartRemoveButton(selector);
+        });
+    }
+
+    function BindCartRemoveButton(selector) {
+        $(selector).unbind('click');
+        $(selector).click(function () {
+            var data = {
+              "product-id": $(this).data("product-id"),
+              "quantity": 0
+            }
+            UpdateCart(data);
+
+            // Stop submission of the form.
+            return false;
+        });
+    }
+
+    function BindCartModifyButtons(selector) {
+        $(selector).each(function (index){
+            BindCartModifyButton(selector);
         });
     }
 
     function BindCartModifyButton(selector) {
-        $(selector).each(function (index){
-            $(this).click(function () {
-                $(this).button('loading')
-                var form = $(this).closest('form');
-                var data = serializeJSON(form);
-                UpdateCart(data)
+        $(selector).unbind('click');
+        $(selector).click(function () {
+            $(this).button('loading')
+            var form = $(this).closest('form');
+            var data = serializeJSON(form);
+            UpdateCart(data)
 
-                // Stop submission of the form.
-                return false;
-            });
-        });
+            // Stop submission of the form.
+            return false;
+          });
+    }
+
+    function UpdateCartIcon(selector, innerHtml) {
+      $(selector).replaceWith(innerHtml);
     }
 
     function UpdateCart(data) {
@@ -77,15 +94,17 @@ var Climbcare = (function() {
             },
             success: function(data, status, jqXHR) {
                 // Update the button displayed next to the product
-                var buttonDiv = "div.catalog-product-" + data["product-id"]
-                $(buttonDiv).replaceWith(data["button-div"])
+                var buttonDivSelector = "div.catalog-product-" + data["product-id"]
+                $(buttonDivSelector).replaceWith(data["button-div"])
                 $(".dropdown-toggle").dropdown();
 
-                $(buttonDiv).siblings("input.catalog-quantity").val(data["quantity"]);
+                var buttonDiv = $(buttonDivSelector)
+                buttonDiv.siblings("input.catalog-quantity").val(data["quantity"]);
 
                 // Bind update button.
-                BindCartModifyButton("button.js-cartmodifybutton");
-                BindCartRemoveButton("a.js-cartremovebutton");
+                BindCartModifyButton(buttonDiv.find("button.js-cartmodifybutton"));
+                BindCartRemoveButton(buttonDiv.find("a.js-cartremovebutton"));
+                UpdateCartIcon("li.js-cart-nav-item", data["cart-nav-item"]);
             }
         }); 
     }
