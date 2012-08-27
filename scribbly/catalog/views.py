@@ -10,7 +10,7 @@ from taxon.models import Taxon
 from taxon.utils import get_root_taxons
 
 @login_required
-def index(request, taxon_slug=None, template_name="scribbly/catalog/index.html"):
+def catalog_index(request, taxon_slug=None, template_name="scribbly/catalog/index.html"):
     taxon_map = get_root_taxons()
 
     # A taxon map should exist, will only happen if none have been created

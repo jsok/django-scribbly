@@ -53,7 +53,13 @@ def logout(request):
     return HttpResponse("You have been logged out.")
 
 @login_required
-def account(request):
+def account(request, template_name="scribbly/customer/account.html"):
     customer = Customer.objects.get(user=request.user)
 
-    return HttpResponse("You are logged in as %s" % customer)
+    context = {
+            "company": customer.company,
+            "email": request.user.email,
+    }
+
+    return render_to_response(template_name,
+            RequestContext(request, context))

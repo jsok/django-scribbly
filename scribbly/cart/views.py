@@ -7,6 +7,11 @@ from django.utils import simplejson
 from product.models import Product
 
 @login_required
+def cart_index(request, template_name="scribbly/cart/index.html"):
+    pass
+
+
+@login_required
 def add_product_to_cart(request):
     """
     AJAX request to add the POST'ed product to the cart.

@@ -16,11 +16,12 @@ urlpatterns += patterns('customer.views',
 )
 
 urlpatterns += patterns('catalog.views',
-    url(r'^catalog/$', "index"),
-    url(r'^catalog/(?P<taxon_slug>[-\w]*)/$', "index"),
+    url(r'^catalog/$', "catalog_index"),
+    url(r'^catalog/(?P<taxon_slug>[-\w]*)/$', "catalog_index"),
 )
 
 urlpatterns += patterns('cart.views',
+    url(r'^cart/$', "cart_index"),
     url(r'^cart/add_product_to_cart$', "add_product_to_cart"),
 )
 

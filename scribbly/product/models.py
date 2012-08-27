@@ -2,7 +2,6 @@ from decimal import Decimal
 from django.db import models
 
 from pricing.models import ProductPriceCategory
-from customer.models import Customer
 from taxon.models import Taxon
 
 class Product(models.Model):

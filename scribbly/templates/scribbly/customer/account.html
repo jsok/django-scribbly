@@ -1,0 +1,16 @@
+{% extends "scribbly/base.html" %}
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<section id="content">
+  <div class="page-header">
+    <h1>Account</h1>
+    <dl class="dl-horizontal">
+    <dt>Email</dt>
+    <dd>{{ email }}</dd>
+    <dt>Company</dt>
+    <dd>{{ company }}</dd>
+    </dl>
+  </div>
+</section>
+{% endblock %}
