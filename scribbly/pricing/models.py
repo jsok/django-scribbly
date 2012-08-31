@@ -43,3 +43,13 @@ class DiscountMatrixEntry(models.Model):
     class Meta:
         verbose_name_plural = "Discount Matrix Entries"
 
+class TaxCategory(models.Model):
+    name = models.CharField(max_length=10)
+    rate = models.FloatField("Tax Rate", default = 0.0)
+
+    def __unicode__(self):
+        return "%s (%d%%)" % (self.name, self.rate)
+
+    class Meta:
+        verbose_name_plural = "Tax Categories"
+

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from pricing.models import ProductPriceCategory, CustomerPriceCategory, DiscountMatrixEntry
+from pricing.models import ProductPriceCategory, CustomerPriceCategory, TaxCategory, DiscountMatrixEntry
 
 class ProductPriceCategoryAdmin(admin.ModelAdmin):
     """
@@ -12,6 +12,10 @@ class CustomerPriceCategoryAdmin(admin.ModelAdmin):
     """
     pass
 
+class TaxCategoryAdmin(admin.ModelAdmin):
+    """
+    """
+    pass
 
 class DiscountMatrixEntryAdmin(admin.ModelAdmin):
     """
@@ -54,4 +58,5 @@ class DiscountMatrixEntryAdmin(admin.ModelAdmin):
 
 admin.site.register(ProductPriceCategory, ProductPriceCategoryAdmin)
 admin.site.register(CustomerPriceCategory, CustomerPriceCategoryAdmin)
+admin.site.register(TaxCategory, TaxCategoryAdmin)
 admin.site.register(DiscountMatrixEntry, DiscountMatrixEntryAdmin)
