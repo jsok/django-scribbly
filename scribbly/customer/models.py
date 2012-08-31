@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from pricing.models import CustomerPriceCategory
+from pricing.models import CustomerPriceCategory, TaxCategory
 
 class Company(models.Model):
     """
@@ -37,6 +37,7 @@ class Customer(models.Model):
 
     # Pricing related
     customer_category = models.ForeignKey(CustomerPriceCategory, null=False)
+    tax_category = models.ForeignKey(TaxCategory, null=False)
 
     def __unicode__(self):
         return "[%s] %s" % (self.company.name, self.user.email)
