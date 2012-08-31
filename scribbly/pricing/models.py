@@ -48,7 +48,7 @@ class TaxCategory(models.Model):
     rate = models.FloatField("Tax Rate", default = 0.0)
 
     def __unicode__(self):
-        return "%s (%d%%)" % (self.name, self.rate)
+        return "%s (%d%%)" % (self.name, self.rate*100.00)
 
     class Meta:
         verbose_name_plural = "Tax Categories"
