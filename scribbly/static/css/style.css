@@ -11,12 +11,22 @@ form {
 
 /* Our styles. */
 body {
-    padding-top: 60px;
+    padding-top: 80px;
     padding-bottom: 40px;
 
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
+}
+
+.navbar .nav > li > a
+{
+  padding: 21px 21px 21px;
+  font-size: 14px;
+}
+.navbar .divider-vertical
+{
+  height: 60px;
 }
 
 th.catalog-sku, th.catalog-rrp, th.catalog-discount, th.catalog-price
