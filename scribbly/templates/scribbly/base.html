@@ -32,8 +32,8 @@
                         {% url customer.views.account as account_url %}
                         {% url catalog.views.catalog_index as catalog_url %}
                         <ul class="nav">
-                            <li class="{% nav_is_active request account_url %}"><a href="{{ account_url }}">Account</a></li>
-                            <li class="{% nav_is_active request catalog_url %}"><a href="{{ catalog_url }}">Product Catalog</a></li>
+                            <li class="{% nav_get_active_class account_url %}"><a href="{{ account_url }}">Account</a></li>
+                            <li class="{% nav_get_active_class catalog_url %}"><a href="{{ catalog_url }}">Product Catalog</a></li>
                         </ul>
 
                         <ul class="nav pull-right">

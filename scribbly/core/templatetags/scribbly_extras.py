@@ -2,29 +2,28 @@ from django import template
 
 register = template.Library()
 
-def get_item(dictionary, key):
+@register.filter
+def dict_lookup(dictionary, key):
     return dictionary.get(key)
-register.filter("dict_lookup", get_item)
 
 @register.tag
-def nav_is_active(parser, token):
+def nav_get_active_class(parser, token):
     import re
     args = token.split_contents()
     template_tag = args[0]
-    if len(args) < 2:
+    if len(args) < 1:
         raise template.TemplateSyntaxError, "%r tag requires at least one argument" % template_tag
-    return NavSelectedNode(args[1:])
-
+    return NavSelectedNode(args[1])
 
 class NavSelectedNode(template.Node):
-    def __init__(self, patterns):
-        self.patterns = patterns
+    def __init__(self, url):
+        self.url = url
 
     def render(self, context):
         path = context['request'].path
-        for p in self.patterns:
-            pValue = template.Variable(p).resolve(context)
-            if path == pValue:
-                return "active"
-        return ""
+        pValue = template.Variable(self.url).resolve(context)
+        if path.startswith(pValue):
+            return "active"
+        else:
+            return ""
 
