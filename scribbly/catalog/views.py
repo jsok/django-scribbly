@@ -41,6 +41,7 @@ def catalog_index(request, taxon_slug=None, template_name="scribbly/catalog/inde
                 cart_items_count += 1
 
     context = {
+            "customer": customer,
             "selected_taxon": selected_taxon,
             "taxon_map": taxon_map,
             "priced_products": priced_products,

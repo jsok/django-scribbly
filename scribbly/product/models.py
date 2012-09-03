@@ -12,7 +12,7 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, max_length=80)
     name = models.CharField(max_length=100)
 
-    price = models.FloatField("Retail Price", default=0.0)
+    price = models.FloatField("Retail Price (excluding Tax)", default=0.0)
     price_category = models.ForeignKey(ProductPriceCategory, null=True)
 
     taxons = models.ManyToManyField(Taxon)

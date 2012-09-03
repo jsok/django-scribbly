@@ -30,7 +30,8 @@ class PricedProduct:
 
     @property
     def retail_price(self):
-        return self.product.price
+        rate = self.customer.tax_category.rate
+        return self.product.price * (1 + rate)
 
     @property
     def discount(self):

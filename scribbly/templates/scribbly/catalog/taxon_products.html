@@ -9,7 +9,7 @@
     <thead>
       <th class="catalog-sku">SKU</th>
       <th class="catalog-name">Name</th>
-      <th class="catalog-rrp">RRP</th>
+      <th class="catalog-rrp">RRP{% if customer.tax_category.rate > 0.0 %} inc. {{ customer.tax_category.name }} {% endif %}</th>
       <th class="catalog-discount">Discount</th>
       <th class="catalog-price">Price</th>
       <th class="catalog-onhand">On Hand</th>
@@ -21,7 +21,7 @@
     <tr>
       <td rowspan="1" class="">{{ p.sku }}</td>
       <td>{{ p.name }}</td>
-      <td>{{ p.retail_price }}</td>
+      <td>{{ p.retail_price|floatformat:2 }}</td>
       <td>{{ p.discount_as_percent_str }}</td>
       <td>{{ p.discounted_price|floatformat:2 }}</td>
       <td><span class="label">{{ p.on_hand }}</span></td>
